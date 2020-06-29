@@ -26,7 +26,7 @@ router.get('/', auth, async (req, res) => {
 //acccess Private
 router.post('/', [auth, [
     check('name','Name is required').not().isEmpty()
-],
+]
 ], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -79,7 +79,7 @@ router.put('/:id', auth, async (req, res) => {
         contact = await Contact.findByIdAndUpdate(req.params.id, 
             { $set: contactFields },
             { new: true });
-            res.json(Contact)
+            res.json(contact)
     } catch (err) {
         console.error(err.message)
         res.status(500).send('Server Error');
