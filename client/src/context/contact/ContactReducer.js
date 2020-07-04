@@ -7,7 +7,8 @@ import {
     UPDATE_CONTACT,
     CLEAR_FILTER,
     FILTER_CONTACTS,
-    CONTACT_ERROR
+    CONTACT_ERROR,
+    CLEAR_CONTACTS
 } from '../types';
 
 export default (state, action) => {
@@ -35,9 +36,17 @@ export default (state, action) => {
          case DELETE_CONTACT:
              return {
                  ...state,
-                 contacts: state.contacts.filter(contact => contact.id !== action.payload),
+                 contacts: state.contacts.filter(contact => contact._id !== action.payload),
                  loading: false
              }
+         case CLEAR_CONTACTS:
+             return {
+                 ...state,
+                 contacts: null,
+                 filtered: null,
+                 error: null,
+                 current: null
+             } 
          case SET_CURRENT:
              return {
                  ...state,
